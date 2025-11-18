@@ -6,18 +6,19 @@ const route = useRoute()
 const items = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Docs',
-    to: '/docs/getting-started',
-    active: route.path.startsWith('/docs/getting-started')
+    to: '/',
+    // active: route.path.startsWith('/')
   },
   {
-    label: 'Components',
-    to: '/docs/components',
-    active: route.path.startsWith('/docs/components')
+    label: 'Blogs',
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   },
   {
-    label: 'Figma',
-    to: 'https://go.nuxt.com/figma-ui',
-    target: '_blank'
+    label: 'Projects',
+    to: '/projects',
+    // target: '_blank'
+    active: route.path.startsWith('/projects')
   },
   {
     label: 'Releases',
@@ -29,7 +30,6 @@ const items = computed<NavigationMenuItem[]>(() => [
 
 <template>
   <UHeader>
-    <h1>I am Header Here</h1>
     <template #title>
       <Logo class="h-6 w-auto" />
     </template>

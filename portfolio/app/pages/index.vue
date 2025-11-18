@@ -3,53 +3,7 @@
     <!-- Navbar -->
 
     <!-- Hero -->
-    <section class="grid md:grid-cols-2 gap-8 items-center mb-16">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Hey, I’m <span class="text-primary-600">Micky Virus</span></h1>
-        <p class="mt-4 text-lg opacity-80 max-w-xl">Full-Stack Developer — I build modern and scalable web apps using <strong>Django REST Framework</strong> &amp; <strong>Nuxt.js</strong>. I craft seamless user experiences backed by strong API engineering — turning ideas into functional digital products that perform in the real world.</p>
-
-        <div class="flex gap-3 mt-6">
-          <UButton color="primary">Hire Me</UButton>
-          <UButton variant="ghost">View My Work</UButton>
-        </div>
-
-        <div class="mt-6 text-sm opacity-80">
-          <p class="mb-2"><strong>Location:</strong> India</p>
-          <p class="mb-0"><strong>Experience:</strong> 3+ years • AliExpress-clone experience (DRF + Nuxt)</p>
-        </div>
-
-        <div class="mt-6 flex gap-2 flex-wrap">
-          <UBadge variant="soft">Python</UBadge>
-          <UBadge variant="soft">Django REST</UBadge>
-          <UBadge variant="soft">Nuxt</UBadge>
-          <UBadge variant="soft">Vue</UBadge>
-          <UBadge variant="soft">Tailwind</UBadge>
-          <UBadge variant="soft">Postgres</UBadge>
-        </div>
-      </div>
-
-      <!-- Projects / Image grid -->
-      <!-- <div>
-        <div class="grid grid-cols-3 gap-3">
-          <div v-for="(p, i) in projects.slice(0,9)" :key="p.id" class="h-28 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-sm">
-            {{ p.title }}
-          </div>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- <section> -->
-      <div class="grid grid-cols-3 gap-3">
-        <div
-          v-for="(img, i) in images"
-          :key="i"
-          class="h-28 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800"
-        >
-          <img :src="img" class="w-full h-full object-cover" />
-        </div>
-      </div>
-  </section>
-
+    <Hero />
 
     <!-- About & Experience -->
     <section class="grid md:grid-cols-3 gap-8 mb-16">
@@ -127,14 +81,12 @@
       <UAccordion :items="faqItems" />
     </section>
 
-    <!-- Footer -->
-    <footer class="pt-12 border-t text-sm opacity-80">
-      © {{ new Date().getFullYear() }} Micky Virus — Built with Nuxt
-    </footer>
   </div>
 </template>
 
 <script setup>
+import Hero from '../components/Hero.vue'
+
 const projects = Array.from({ length: 12 }).map((_, i) => ({ id: i + 1, title: `Project ${i + 1}` }))
 const images = [
   "/projects/img1.png",
