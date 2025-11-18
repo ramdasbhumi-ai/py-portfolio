@@ -1,47 +1,60 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import { ref, computed } from 'vue'
 
-const route = useRoute()
+const searchTerm = ref('')
 
-const items = computed<NavigationMenuItem[]>(() => [
-  {
-    label: 'Docs',
-    to: '/',
-    // active: route.path.startsWith('/')
-  },
-  {
-    label: 'Blogs',
-    to: '/blog',
-    active: route.path.startsWith('/blog')
-  },
-  {
-    label: 'Projects',
-    to: '/projects',
-    // target: '_blank'
-    active: route.path.startsWith('/projects')
-  }
-])
+// Example projects list
+const allProjects = [
+  { id: 1, name: 'Project Alpha', path: '/projects/alpha' },
+  { id: 2, name: 'Project Beta', path: '/projects/beta' },
+  { id: 3, name: 'Project Gamma', path: '/projects/gamma' }
+]
+
+const groups = computed(() => [{
+  id: 'projects',
+  label: searchTerm.value ? `Projects matching “${searchTerm.value}”...` : 'Projects',
+  items: allProjects
+    .filter(p => p.name.toLowerCase().includes(searchTerm.value.toLowerCase()))
+    .map(p => ({ label: p.name, to: p.path })),
+  ignoreFilter: true
+}])
 </script>
-
 <template>
-   <UHeader toggle-side="left">
+  <UHeader toggle-side="left">
     <template #title>
-      <!-- <Logo class="h-6 w-auto" /> -->
-       <img
+      <img
         src="/logo-svg.png"
         alt="Design showcase"
         class="h-10 w-auto rounded shadow-2xl ring ring-default"
       />
     </template>
 
-    <UNavigationMenu :items="items" />
+    <UNavigationMenu :items="[
+      { label: 'Docs', to: '/' },
+      { label: 'Blogs', to: '/blog' }
+    ]" />
 
     <template #right>
-      <UColorModeButton />
-    </template>
+      <!-- Open Projects Command Palette -->
+      <UModal>
+        <UButton
+          label="Projects"
+          color="neutral"
+          variant="outline"
+          icon="i-lucide-search"
+        />
 
-    <template #body>
-      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <template #content>
+          <UCommandPalette
+            v-model:search-term="searchTerm"
+            :groups="groups"
+            placeholder="Search projects..."
+            class="h-80"
+          />
+        </template>
+      </UModal>
+
+      <UColorModeButton />
     </template>
   </UHeader>
 </template>
