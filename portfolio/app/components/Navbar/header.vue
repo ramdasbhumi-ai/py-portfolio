@@ -19,36 +19,29 @@ const items = computed<NavigationMenuItem[]>(() => [
     to: '/projects',
     // target: '_blank'
     active: route.path.startsWith('/projects')
-  },
-  {
-    label: 'Releases',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
   }
 ])
 </script>
 
 <template>
-  <UHeader>
+   <UHeader toggle-side="left">
     <template #title>
-      <Logo class="h-6 w-auto" />
+      <!-- <Logo class="h-6 w-auto" /> -->
+       <img
+        src="/logo-svg.png"
+        alt="Design showcase"
+        class="h-10 w-auto rounded shadow-2xl ring ring-default"
+      />
     </template>
 
     <UNavigationMenu :items="items" />
 
     <template #right>
       <UColorModeButton />
+    </template>
 
-      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-        <UButton
-          color="neutral"
-          variant="ghost"
-          to="https://github.com/nuxt/ui"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-        />
-      </UTooltip>
+    <template #body>
+      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
   </UHeader>
 </template>
